@@ -1,5 +1,7 @@
 {% extends 'news/base.html' %}
 {% load static %}
+{% load hitcount_tags %}
+
 
 {% block title %} Home Page {% endblock title %}
 
@@ -53,7 +55,7 @@
                 <li>
                   <figure class="bsbig_fig"> <a href="{{local.get_absolute_url}}" class="featured_img"> <img alt="" src="{{local.image.url}}"> <span class="overlay"></span> </a>
                     <figcaption> <a href="{{local.get_absolute_url}}">{{local.title | truncatewords:5}}</a> </figcaption>
-                    <p>{{news.title}}</p>
+                    <p>{{news.title}}</p> <i class="fa fa-eye"></i> {% get_hit_count for local %}
                   </figure>
                 </li>
                   {% endif %}
@@ -67,6 +69,7 @@
                 <li>
                   <div class="media wow fadeInDown"> <a href="{{local.get_absolute_url}}" class="media-left"> <img alt="" src="{{local.image.url}}"> </a>
                     <div class="media-body"> <a href="{{local.get_absolute_url}}" class="catg_title"> {{local.title | truncatewords:5}}</a> </div>
+                    <i class="fa fa-eye"></i> {% get_hit_count for local %}
                   </div>
                 </li>
                   {% endif %}
@@ -187,7 +190,7 @@
             </div>
             <div class="single_post_content_right">
               <ul class="spost_nav">
-                {% for sport in sports %}
+                {% for sport in sport_news %}
                   {% if forloop.counter > 1 %}
                   <li>
                     <div class="media wow fadeInDown"> <a href="{{sport.get_absolute_url}}" class="media-left"> <img alt="" src="{{sport.image.url}}"> </a>

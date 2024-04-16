@@ -1,0 +1,16 @@
+{%extends 'news/base.html'%}
+
+{%block content%}
+
+<div class="center">
+	<h2 class="text-center"> Yangilikni tahrirlash </h2>
+ <form method="post" enctype="multipart/form-data" novalidate class="card">
+	 {%csrf_token %}
+	 <p class="text-pink" > {{ news.title | truncatewords:3 }}...sarlavjali yangilikni tahrirlashni istaysizmi?  </p>
+	 {{form.as_p}}
+	<button type="submit" class="btn btn-primary ml-2"> Edit </button>
+
+</form>
+</div>
+
+{%endblock content%}

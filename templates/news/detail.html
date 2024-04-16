@@ -1,14 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>News Detail Page</title>
-</head>
-<body>
-    <h2> {{ news.title }} </h2>
-    <i> {{ news.slug }} </i>
-    <p> {{ news.body }} </p>
-    <i> {{ news.publish_time }} </i>
+{% extends 'news/base.html' %}
+{% load static %}
+{% load hitcount_tags %}
+{% block title %} Detail Page {% endblock %}
 
-</body>
-</html>
+{% block content %}
+    <h2> {{ news.title }} </h2>
+    <p> <i class="fa fa-eye"></i> {% get_hit_count for news %} </p>
+    <p> <img src="{{ news.image.url }}" width="30%"> </p>
+    <p> {{ news.body }} </p>
+    <i> {{ news.publish_time }} </i><br>
+
+    <div class="text-center">
+        {% if user.is_authenticated and user.is_superuser %}
+            <a class="text-primary" href="{% url 'news-update' news.slug %}">Tahrirlash</a> |
+            <a class="text-primary" href="{% url 'news-delete' news.slug %}">O'chirish</a> |
+            <a class="text-primary" href="{% url 'create-page' %}">Qo'shish</a>
+        {% endif %}
+    </div>
+    {% with comments.count as total_comments %}
+    <h2>
+        {{ total_comments }} comment{{ total_comments|pluralize }}
+    </h2>
+    {% endwith %}
+
+    <a href = "{% url 'home_page' %}">
+        Asosiy sahifaga qaytish
+    </a>
+
+    {% for comment in comments %}
+        <div>
+            <p >
+                Comment {{ forloop.counter }} by {{ comment.user }} on {{ comment.created_time }}
+            </p>
+            {{ comment.body|linebreaks }}
+        </div>
+    {% empty %}
+        <div>
+            <p>There are no comments.</p>
+        </div>
+    {% endfor %}
+
+    <div class='card'>
+        <div class="card-body">
+            <form action="#" method="post">{% csrf_token %}
+                {{comment_form.as_p}}
+                <p> <button type="submit" class="btn btn-primary">Saqlash</button> </p>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
+

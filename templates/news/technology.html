@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'news/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block title %} Local Page {% endblock %}
+
+{% block content %}
+    <h2> Fan-texnika yangiliklar </h2>
+    {% for news in texnologiya %}
+        <p>{{ news.title | truncatewords:5}}</p>
+        <img src="{% static 'news.image' %}" alt="Rasmlar nega ochmiyapti">
+        <p>{{ news.body | truncatewords:10}}</p>
+        <i>{{ news.publish_time}}</i>
+    {% endfor %}
+{% endblock content %}

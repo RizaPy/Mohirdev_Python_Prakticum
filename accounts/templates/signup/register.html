@@ -1,0 +1,14 @@
+{% extends 'news/base.html' %}
+{% load  static %}
+
+{% block title %} Ro'yhatdan o'tish {% endblock title %}
+
+{% block content %}
+
+    <h2>Ro'yhatdan o'tish uchun quyidagi formani to'ldiring!</h2>
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        {{ user_form.as_p }}
+        <p> <button type="submit" class="btn btn-danger btn-bg-none"> Ro'yhatdan o'tish </button> </p>
+    </form>
+
+{% endblock content %}

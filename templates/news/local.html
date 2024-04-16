@@ -1,10 +1,15 @@
 {% extends 'news/base.html' %}
 {% load static %}
+{% load hitcount_tags %}
 
-{% block title %} Mahalliy yangiliklar {% endblock %}
+{% block title %} Local Page {% endblock %}
 
 {% block content %}
-
-    {{  }}
-
+    <h2> Mahalliy yangiliklar </h2>
+    {% for local in mahalliy %}
+        <p>{{ local.title | truncatewords:5}}</p>
+        <img src="{{ local.image.url }}" alt="Rasmlar nega ochmiyapti" width="30%">
+        <p>{{ local.body | truncatewords:10}}</p>
+        <i>{{ local.publish_time}}</i> <i class="fa fa-eye"></i> {% get_hit_count for local %}
+    {% endfor %}
 {% endblock content %}

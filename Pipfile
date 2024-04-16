@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 pillow = "*"
 django = "==4"
+django-hitcount = "*"
 
 [dev-packages]
 

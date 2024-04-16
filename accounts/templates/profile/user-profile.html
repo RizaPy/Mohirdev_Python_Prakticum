@@ -1,0 +1,28 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %} Foydalanuvchi sahifasi {% endblock title %}
+
+{% block content %}
+  <div class="container  between">
+  <div class="row d-flex justify-content-between">
+    <div class="col-6"><img src="{{profil.image.url}}"  width="30%"></div>
+    <div class="col-6 text-primary">
+        <p>{{ user.first_name }}</p>
+        <p>{{ user.last_name }}</p>
+        <p>{{ user.email }}</p>
+        <p>Manzili: {{profil.location}}</p>
+        <p>Biogrpfiya: {{profil.bio}}</p>
+        <p>Tug'ilgan sanasi: {{profil.birth_date}}</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class=" d-flex justify-content-between">
+    <h5 ><a href="{% url 'password_change' %}" class="text-primary"> Parolni o'zgartirish </a>  </h5>
+    <h5 ><a href="{% url 'logout' %}" class="text-primary"> Log out </a>  </h5>
+</div>
+{% endblock  %}

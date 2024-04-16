@@ -36,6 +36,17 @@
             </ul>
           </div>
           <div class="header_top_right">
+
+            <p class="text-info ">
+              {% if request.user.is_authenticated %}
+                <a href="{% url 'user-profile' %}" class="text-danger fs-16">{{user.username}}</a>
+                <a href="{% url 'logout' %}" class="text-danger">LogOut</a>
+              {% else %}
+                <a href="{% url 'login' %}" class="text-danger fs-16">LogIn</a>
+
+              {% endif %}
+            </p>
+
             <p>{% now "jS F Y H:i" %}</p>
           </div>
         </div>
@@ -62,7 +73,14 @@
           <li><a href="{% url 'sport_page' %}">Sport</a></li>
           <li><a href="{% url 'contact_page' %}">Contact Us</a></li>
           <li><a href="pages/404.html">404 Page</a></li>
+          <li>
+              <form action="{% url 'search_result' %}" method="get">
+                <input  type="search" name="q" placeholder="Qidiruv..." class="form-control">
+              </form>
+          </li>
         </ul>
+
+
       </div>
     </nav>
   </section>
